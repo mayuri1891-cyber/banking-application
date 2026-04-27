@@ -18,7 +18,7 @@ public class AuthController {
 
     @PostMapping("/login")
     public AuthResponse login(@RequestBody AuthRequest request) {
-    log.info("Received login request for username: {}", request.getUsername());
+    log.info("Received login request for username 1: {}", request.getUsername());
         String token = authService.authenticate(
                 request.getUsername(),
                 request.getPassword()
