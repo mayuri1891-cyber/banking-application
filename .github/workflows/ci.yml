@@ -36,14 +36,17 @@ jobs:
       # 🔨 Build project
       - name: Build with Maven
         run: mvn clean install -DskipTests
+        working-directory: auth-service
 
       # 🧪 Run tests
       - name: Run tests
         run: mvn test
+        working-directory: auth-service
 
       # 🐳 Build Docker image
       - name: Build Docker image
         run: docker build -t auth-service:latest .
+        working-directory: auth-service
 
 
       # 🔐 Login to Docker Hub
