@@ -9,6 +9,8 @@ spring:
           uri: http://auth-service:80
           predicates:
             - Path=/auth/**
+          filters:
+            - StripPrefix=1
 
 management:
   endpoints:
