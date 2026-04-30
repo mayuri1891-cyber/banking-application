@@ -43,7 +43,10 @@
 
         <dependency>
             <groupId>org.springframework.cloud</groupId>
-            <artifactId>spring-cloud-starter-gateway</artifactId>
+            <artifactId>spring-cloud-dependencies</artifactId>
+            <version>2023.0.1</version> <!-- or latest compatible -->
+            <type>pom</type>
+            <scope>import</scope>
         </dependency>
 
         <dependency>
