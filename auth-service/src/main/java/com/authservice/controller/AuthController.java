@@ -17,7 +17,6 @@ public class AuthController {
     private AuthService authService;
 
 
-
     @PostMapping("/login")
     public AuthResponse login(@RequestBody AuthRequest request) {
 
@@ -34,7 +33,6 @@ public class AuthController {
                         List.of() // roles if needed
                 );
 
-        SecurityContextHolder.getContext().setAuthentication(authentication);
 
         return new AuthResponse(token);
     }

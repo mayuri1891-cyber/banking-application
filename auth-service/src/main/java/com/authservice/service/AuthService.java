@@ -5,6 +5,7 @@ import com.authservice.repository.UserRepository;
 import com.authservice.security.JwtUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.security.crypto.password.PasswordEncoder;
 
 @Service
 public class AuthService {
@@ -13,18 +14,26 @@ public class AuthService {
     private UserRepository userRepository;
 
     @Autowired
-    private JwtUtil jwtUtil;
+    private PasswordEncoder passwordEncoder;
 
-    public String authenticate(String username, String password) {
+    @Autowired
+    private JwtUtil jwtService;
 
-        User user = userRepository.findByUsername(username)
-                .orElseThrow(() -> new RuntimeException("User not found"));
 
-        // For demo: plain password (in real use BCrypt)
-        if (!user.getPassword().equals(password)) {
-            throw new RuntimeException("Invalid password");
+
+        public String authenticate(String username, String password) {
+
+            User user = userRepository.findByUsername(username)
+                    .orElseThrow(() -> new RuntimeException("User not found"));
+
+            // ✅ IMPORTANT LINE
+            if (!passwordEncoder.matches(password, user.getPassword())) {
+                throw new RuntimeException("Invalid credentials");
+            }
+
+            // ✅ Generate JWT
+            return jwtService.generateToken(username);
         }
 
-        return jwtUtil.generateToken(username);
     }
-}
+
