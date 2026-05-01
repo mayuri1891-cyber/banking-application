@@ -21,8 +21,7 @@ public class AuthController {
     public AuthResponse login(@RequestBody AuthRequest request) {
 
         String token = authService.authenticate(
-                request.getUsername(),
-                request.getPassword()
+                request
         );
 
         // ✅ VERY IMPORTANT

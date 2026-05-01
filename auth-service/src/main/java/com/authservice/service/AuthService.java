@@ -6,6 +6,7 @@ import com.authservice.security.JwtUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.security.crypto.password.PasswordEncoder;
+import com.authservice.dto.AuthRequest;
 
 @Service
 public class AuthService {
@@ -17,23 +18,25 @@ public class AuthService {
     private PasswordEncoder passwordEncoder;
 
     @Autowired
-    private JwtUtil jwtService;
+    private JwtUtil jwtUtil;
 
+ /*   public void register(RegisterRequest request) {
+        User user = new User();
+        user.setUsername(request.getUsername());
+        user.setPassword(passwordEncoder.encode(request.getPassword())); // ✅ always encode
+        user.setRole(request.getRole());
+        userRepository.save(user);
+    }*/
 
+    public String authenticate(AuthRequest request) {
+        User user = userRepository.findByUsername(request.getUsername())
+                .orElseThrow(() -> new RuntimeException("User not found"));
 
-        public String authenticate(String username, String password) {
-
-            User user = userRepository.findByUsername(username)
-                    .orElseThrow(() -> new RuntimeException("User not found"));
-
-            // ✅ IMPORTANT LINE
-            if (!passwordEncoder.matches(password, user.getPassword())) {
-                throw new RuntimeException("Invalid credentials");
-            }
-
-            // ✅ Generate JWT
-            return jwtService.generateToken(username);
+        // ✅ matches() compares raw password against the stored hash
+        if (!passwordEncoder.matches(request.getPassword(), user.getPassword())) {
+            throw new RuntimeException("Invalid credentials");
         }
 
+        return jwtUtil.generateToken(user.getUsername());
     }
-
+}
