@@ -11,7 +11,8 @@ spring:
             - Path=/auth/**
           filters:
             - StripPrefix=1
-
+jwt:
+  secret: your_very_long_and_secure_random_secret_key_here
 management:
   endpoints:
     web:
