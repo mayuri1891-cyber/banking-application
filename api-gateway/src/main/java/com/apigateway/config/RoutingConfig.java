@@ -8,13 +8,25 @@ import org.springframework.context.annotation.Configuration;
 @Configuration
 public class RoutingConfig {
 
-    @Bean
+/*    @Bean
     public RouteLocator routes(RouteLocatorBuilder builder) {
         return builder.routes()
                 .route("auth-service", r -> r
                         .path("/auth/**", "/login")
                         .filters(f -> f.stripPrefix(0))
                         .uri("http://auth-service:80"))
+                .build();
+    }*/
+
+    @Bean
+    public RouteLocator routes(RouteLocatorBuilder builder) {
+        return builder.routes()
+
+                .route("auth-service", r -> r
+                        .path("/auth/**")
+                        .filters(f -> f.stripPrefix(1))
+                        .uri("http://auth-service:8080"))
+
                 .build();
     }
 }
