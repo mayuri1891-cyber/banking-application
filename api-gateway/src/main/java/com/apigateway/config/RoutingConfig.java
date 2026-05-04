@@ -13,7 +13,7 @@ public class RoutingConfig {
         return builder.routes()
                 .route("auth-service", r -> r
                         .path("/auth/**", "/login")
-                        .filters(f -> f.stripPrefix(1))
+                        .filters(f -> f.stripPrefix(0))
                         .uri("http://auth-service:80"))
                 .build();
     }
