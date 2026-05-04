@@ -10,7 +10,7 @@ import org.springframework.security.core.context.SecurityContextHolder;
 import java.util.List;
 @lombok.extern.slf4j.Slf4j
 @RestController
-@RequestMapping("/auth")
+//@RequestMapping("/auth")
 public class AuthController {
 
     @Autowired
