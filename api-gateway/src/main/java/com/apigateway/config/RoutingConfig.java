@@ -12,7 +12,7 @@ public class RoutingConfig {
     public RouteLocator routes(RouteLocatorBuilder builder) {
         return builder.routes()
                 .route("auth-service", r -> r
-                        .path("/auth/**")
+                        .path("/auth/**", "/login")
                         .filters(f -> f.stripPrefix(1))
                         .uri("http://auth-service:80"))
                 .build();

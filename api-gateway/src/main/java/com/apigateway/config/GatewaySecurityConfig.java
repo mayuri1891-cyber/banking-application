@@ -52,7 +52,7 @@ public class GatewaySecurityConfig {
         http
                 .csrf(csrf -> csrf.disable())
                 .authorizeExchange(exchanges -> exchanges
-                        .pathMatchers("/auth/**").permitAll()
+                        .pathMatchers("/auth/**", "/login").permitAll()
                         .anyExchange().authenticated()
                 )
                 .httpBasic(httpBasic -> httpBasic.disable())
