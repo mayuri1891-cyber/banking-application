@@ -23,9 +23,14 @@ public class SecurityConfig {
                 .sessionManagement(session ->
                         session.sessionCreationPolicy(SessionCreationPolicy.STATELESS)  // ✅ now resolved
                 )
-                .authorizeHttpRequests(auth -> auth
+               /* .authorizeHttpRequests(auth -> auth
                         .requestMatchers("/auth/**").permitAll()
                         .requestMatchers("/actuator/**").permitAll()
+                        .anyRequest().authenticated()
+                )*/
+                .authorizeHttpRequests(auth -> auth
+                        .requestMatchers("/error").permitAll() // Explicitly permit error handling
+                        .requestMatchers("/auth/**", "/login").permitAll()
                         .anyRequest().authenticated()
                 )
                 .formLogin(form -> form.disable())

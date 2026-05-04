@@ -1,4 +1,5 @@
 package com.apigateway.config;
+
 import org.springframework.security.web.server.util.matcher.NegatedServerWebExchangeMatcher;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -38,12 +39,13 @@ import io.jsonwebtoken.security.Keys;
 import java.nio.charset.StandardCharsets;
 import java.security.Key;
 import java.util.List;
+
 @Configuration
 @EnableWebFluxSecurity
 public class GatewaySecurityConfig {
 
     //@Value("${jwt.secret}")
-    private final String jwtSecret="your_very_long_and_secure_random_secret_key_here";
+    private final String jwtSecret = "your_very_long_and_secure_random_secret_key_here";
 
     @Bean
     public SecurityWebFilterChain springSecurityFilterChain(ServerHttpSecurity http) {
