@@ -15,5 +15,6 @@ spec:
       containers:
         - name: api-gateway
           image: mayurir/api-gateway:latest
+          imagePullPolicy: Always   # 🔥 IMPORTANT FIX
           ports:
             - containerPort: 8080
