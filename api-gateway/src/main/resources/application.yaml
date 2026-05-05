@@ -1,12 +1,12 @@
 server:
-  port: 8080
+  port: 8081
 
 spring:
   cloud:
     gateway:
       routes:
         - id: auth-service
-          uri: http://auth-service:8080
+          uri: http://auth-service:8082
           predicates:
             - Path=/auth/**
           filters:

@@ -16,7 +16,7 @@ spec:
         - name: auth-service
           image: mayurir/auth-service:latest
           ports:
-            - containerPort: 8080
+            - containerPort: 8082
           env:
             - name: SPRING_DATASOURCE_URL
               value: jdbc:mysql://mysql:3306/auth_db?createDatabaseIfNotExist=true&allowPublicKeyRetrieval=true&useSSL=false
